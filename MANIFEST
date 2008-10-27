@@ -1,0 +1,6 @@
+CHANGES
+Makefile.PL
+MANIFEST
+README
+t/Getopt-Long-XML.t
+lib/Getopt/Long/XML.pm
