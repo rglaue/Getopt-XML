@@ -27,7 +27,7 @@ EXAMPLE
 
     use XML::TreePP;
     use Getopt::Long;
-    use Getopt::Long::XML;
+    use Getopt::XML;
     use Data::Dump qw(dump);
     #
     # Set the XML Data
