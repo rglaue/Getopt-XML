@@ -1,4 +1,4 @@
-Getopt-Long-XML version 1.00
+Getopt-XML version 1.00
 ============================
 
 This is simply another way to pass in user defined arguments to an application
@@ -27,7 +27,7 @@ EXAMPLE
 
     use XML::TreePP;
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptions);
     use Data::Dump qw(dump);
     #
     # Set the XML Data
