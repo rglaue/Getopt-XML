@@ -11,7 +11,7 @@ Getopt::Long module
 
     use XML::TreePP;
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptions);
     use Data::Dump qw(dump);
     #
     # Set the XML Data
@@ -59,7 +59,7 @@ Alternately, the XML data can be in a file.
 The above code would be rewritten as this:
 
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptions);
     use Data::Dump qw(dump);
     #
     my %options;
@@ -449,7 +449,7 @@ Using either method works the same and returns the same output.
 =head2 Method: XMLToGetoptArgsArray
 
     use Getopt::Long qw(GetOptionsFromArray); # requires Getopt::Long 2.37 or greater
-    use Getopt::XML;
+    use Getopt::XML qw(XMLToGetoptArgsArray);
     use XML::TreePP;    
     
     my $tpp     = XML::TreePP->new();
@@ -481,7 +481,7 @@ parsed XML::TreePP document which will be used to create the arguments that
 would be passed in to the Getopt::Long::GetOptionsFromArray() method.
 
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptions);
     use XML::TreePP;    
     # Parse the XML file into an XML::TreePP document
     my $tpp     = XML::TreePP->new();
@@ -520,7 +520,7 @@ With the Getopt::XML module, you can now put the would be user
 input into an XML file like the example below.
 
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptionsFromFile);
     # Define %options, and populate it with options found in the XML file
     my %options;
     GetXMLOptionsFromFile (
@@ -584,7 +584,7 @@ This prints out the value of the <single_option></single_option> element as
 found in the XML file.
 
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptionsFromFile);
     my %options;
     GetXMLOptionsFromFile (
             xmlfile  => '/path/to/xml_file.xml',
@@ -609,7 +609,7 @@ command line. However, if the user did not provide such input, then the value
 for this option as found in the XML file is what is printed out.
 
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptionsFromFile);
     # Read in the default arguments for your options from the XML file:
     my %options;
     GetXMLOptionsFromFile (
@@ -637,7 +637,7 @@ Optionally, if you are using the XML::TreePP module for your XML files, you can
 pass in the parsed XML::TreePP XML document instead of the actual file.
 
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptions);
     use XML::TreePP;    
     # Parse the XML file using XML::TreePP module
     my $tpp     = XML::TreePP->new();
@@ -660,7 +660,7 @@ Leveraging the capabilites of XML::TreePP, you can also fetch the XML file
 from the internet via a HTTP GET request
 
     use Getopt::Long;
-    use Getopt::XML;
+    use Getopt::XML qw(GetXMLOptions);
     use XML::TreePP;    
     # Parse the XML file using XML::TreePP module
     my $tpp     = XML::TreePP->new();
