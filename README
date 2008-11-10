@@ -89,6 +89,7 @@ This module requires these other modules and libraries:
   Getopt::Long >= 2.37
   XML::TreePP
   XML::TreePP::XMLPath
+  Params::Validate
 
 
 COPYRIGHT AND LICENCE
