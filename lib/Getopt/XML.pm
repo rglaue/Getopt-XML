@@ -154,7 +154,6 @@ use warnings;
 use Exporter;
 use Getopt::Long qw(GetOptionsFromArray);  # requires Getopt::Long 2.37 or greater
 use Params::Validate qw(:all);
-use Pod::Usage;
 use XML::TreePP;
 use XML::TreePP::XMLPath qw(getSubtree);
 
