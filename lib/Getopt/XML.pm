@@ -168,7 +168,7 @@ BEGIN {
     $REF_NAME   = "Getopt::XML";  # package name
 
     use vars      qw( $VERSION );
-    $VERSION    = '0.50';
+    $VERSION    = '0.51';
 }
 
 

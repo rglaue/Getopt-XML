@@ -1,4 +1,9 @@
 Revision history for Perl extension Getopt::XML.
 
+0.51	2008-11-10 reg
+	- Added Params::Validate dependency to Makefile to allow for
+	  successful building
+	- Removed reference to Pod::Usage
+
 0.50	2008-11-03 reg
 	- original version
