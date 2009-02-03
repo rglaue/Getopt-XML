@@ -237,6 +237,7 @@ Getopt::Long::GetOptionsFromArray() method.
 # XMLToGetoptArgsArray
 # @param    xmltree     the XML::TreePP XML Tree
 # @return   [options]   an array reference of options suitable for GetOpt::Long::GetoptionsFromArray()
+sub XMLToGetoptArgsArray ($);
 sub XMLToGetoptArgsArray ($) {
     my $self    = shift if ref($_[0]) eq $REF_NAME || undef;
     validate_pos( @_, 1);
