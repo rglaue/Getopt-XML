@@ -148,7 +148,7 @@ Example:
 
 package Getopt::XML;
 
-use 5.008008;
+use 5.008001;
 use strict;
 use warnings;
 use Exporter;
