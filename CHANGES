@@ -1,4 +1,10 @@
-Revision history for Perl extension Getopt::XML.
+Revision history for Perl module Getopt::XML.
+
+0.52	2009-09-23 reg
+        - Removed dependency on Params::Validate
+        - Updated to use XML::TreePP::XMLPath >= 0.56, removing
+          deprecated methods
+        - Now uses Carp
 
 0.51	2008-11-10 reg
 	- Added Params::Validate dependency to Makefile to allow for

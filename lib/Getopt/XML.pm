@@ -103,6 +103,7 @@ XML as input to an application.
 =head1 REQUIREMENTS
 
 The following perl modules are depended on by this module:
+( I<Note: Dependency on Params::Validate was removed in version 0.52> )
 
 =over 4
 
@@ -111,8 +112,6 @@ The following perl modules are depended on by this module:
 =item *     XML::TreePP::XMLPath
 
 =item *     Getopt::Long            # Getopt::Long 2.37 or greater is required
-
-=item *     Params::Validate
 
 =back
 
@@ -132,9 +131,9 @@ methods can be imported into its space.
 
 =over 4
 
-=item *     GetXMLOptions
+=item *     C<GetXMLOptions>
 
-=item *     GetXMLOptionsFromFile
+=item *     C<GetXMLOptionsFromFile>
 
 =back
 
@@ -152,10 +151,10 @@ use 5.008001;
 use strict;
 use warnings;
 use Exporter;
+use Carp;
 use Getopt::Long qw(GetOptionsFromArray);  # requires Getopt::Long 2.37 or greater
-use Params::Validate qw(:all);
 use XML::TreePP;
-use XML::TreePP::XMLPath qw(getSubtree);
+use XML::TreePP::XMLPath qw(filterXMLDoc);
 
 
 BEGIN {
@@ -240,19 +239,18 @@ Getopt::Long::GetOptionsFromArray() method.
 sub XMLToGetoptArgsArray ($);
 sub XMLToGetoptArgsArray ($) {
     my $self    = shift if ref($_[0]) eq $REF_NAME || undef;
-    validate_pos( @_, 1);
+    if (@_ != 1) { carp 'method XMLToGetoptArgsArray($) requires one argument.'; return undef; }
     my $xmltree = shift;
     my @options;
 
-    # This is probably not a good idea to accept an array of elements to parse
     if (ref $xmltree eq "ARRAY") {
+        # If the XMLPath filters to more than one node, we accept all results
         foreach my $xml_e (@{$xmltree}) {
             my $sopt = XMLToGetoptArgsArray($xml_e);
             next if !defined $sopt;
             push (@options,@{$sopt});
         }
         return \@options;
-        # end of not a good idea
     } elsif (ref $xmltree ne "HASH") {
         return undef;
     }
@@ -330,18 +328,20 @@ of the expected Getopt::Long::GetOptions() input options.
 #
 sub GetXMLOptions (@) {
     my $self    = shift if ref($_[0]) eq $REF_NAME || undef;
-    # not yet supported # @param  dtddoc   (optional) the DTD doc to validate the XML doc
-    my %args    =   validate ( @_,  {   xmldoc      => { optional => 0 },
-                                        dtddoc      => { optional => 1 },
-                                        xmlpath     => { type => SCALAR, optional => 1 },
-                                        Getopt_Long => { type => ARRAYREF, optional => 1 }
-                                    }
-                             );
+    if (! @_ >= 1) { carp 'method GetXMLOptions(@) requires at least one argument.'; return undef; }
+    my %args    = @_;  # xmldoc, dtddoc, xmlpath, Getopt_Long,
     my $tree    = $args{'xmldoc'};
+    # not yet supported # @param  dtddoc   (optional) the DTD doc to validate the XML doc    
+    #my %args    =   validate ( @_,  {   xmldoc      => { optional => 0 },
+    #                                    dtddoc      => { optional => 1 },
+    #                                    xmlpath     => { type => SCALAR, optional => 1 },
+    #                                    Getopt_Long => { type => ARRAYREF, optional => 1 }
+    #                                }
+    #                         );
     my $subtree;
 
     if (defined $args{'xmlpath'}) {
-        $subtree = getSubtree($tree,$args{'xmlpath'});
+        $subtree = filterXMLDoc($tree,$args{'xmlpath'});
     } else {
         $subtree = $tree;
     }
@@ -394,13 +394,15 @@ of the expected Getopt::Log::GetOptions() input options.
 #
 sub GetXMLOptionsFromFile (@) {
     my $self    = shift if ref($_[0]) eq $REF_NAME || undef;
+    if (! @_ >= 1) { carp 'method GetXMLOptionsFromFile(@) requires at least one argument.'; return undef; }
+    my %args    = @_;  # xmlfile, dtdfile, xmlpath, Getopt_Long,
     # not yet supported # @param  dtdfile   (optional) the DTD file to validate the XML file
-    my %args    =   validate ( @_,  {   xmlfile     => { optional => 0 },
-                                        dtdfile     => { optional => 1 },
-                                        xmlpath     => { type => SCALAR, optional => 1 },
-                                        Getopt_Long => { type => ARRAYREF, optional => 0 }
-                                    }
-                             );
+    #my %args    =   validate ( @_,  {   xmlfile     => { optional => 0 },
+    #                                    dtdfile     => { optional => 1 },
+    #                                    xmlpath     => { type => SCALAR, optional => 1 },
+    #                                    Getopt_Long => { type => ARRAYREF, optional => 0 }
+    #                                }
+    #                         );
 
     my $tpp     = XML::TreePP->new();
     my $tree    = $tpp->parsefile( $args{'xmlfile'} );
@@ -685,13 +687,17 @@ Russell E Glaue, http://russ.glaue.org
 
 =head1 SEE ALSO
 
-Getopt::Long
+C<Getopt::Long>
 
-XML::TreePP
+C<XML::TreePP>
+
+C<XML::TreePP::XMLPath>
+
+Getopt::XML on Codepin: http://www.codepin.org/project/perlmod/Getopt-XML
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2008 Center for the Application of Information Technologies.
+Copyright (c) 2008-2009 Center for the Application of Information Technologies.
 All rights reserved.
 
 This program is free software; you can redistribute it and/or modify it under

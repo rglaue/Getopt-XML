@@ -1,4 +1,4 @@
-Getopt-XML version 0.51
+Getopt-XML version 0.52
 ============================
 
 This is simply another way to pass in user defined arguments to an application
@@ -89,12 +89,11 @@ This module requires these other modules and libraries:
   Getopt::Long >= 2.37
   XML::TreePP
   XML::TreePP::XMLPath
-  Params::Validate
 
 
 COPYRIGHT AND LICENCE
 
-Copyright (c) 2008 Center for the Application of Information Technologies.
+Copyright (c) 2008-2009 Center for the Application of Information Technologies.
 All rights reserved.
 
 This program is free software; you can redistribute it and/or modify
