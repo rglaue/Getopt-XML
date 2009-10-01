@@ -1,5 +1,9 @@
 Revision history for Perl module Getopt::XML.
 
+0.53	2009-10-01 reg
+        - Fixed issue that caused Make tests to fail, due to the test plan
+          being configured for 8 tests, when it only had 7 actual tests.
+
 0.52	2009-09-23 reg
         - Removed dependency on Params::Validate
         - Updated to use XML::TreePP::XMLPath >= 0.56, removing
