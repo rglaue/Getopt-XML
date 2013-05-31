@@ -152,7 +152,7 @@ use strict;
 use warnings;
 use Exporter;
 use Carp;
-use Getopt::Long qw(GetOptionsFromArray);  # requires Getopt::Long 2.37 or greater
+use Getopt::Long 2.37 qw(GetOptionsFromArray);  # requires Getopt::Long 2.37 or greater
 use XML::TreePP;
 use XML::TreePP::XMLPath qw(filterXMLDoc);
 
@@ -697,11 +697,12 @@ Getopt::XML on Codepin: http://www.codepin.org/project/perlmod/Getopt-XML
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2008-2009 Center for the Application of Information Technologies.
+Copyright (c) 2008-2009 Russell E Glaue,
+Center for the Application of Information Technologies,
+Western Illinois University.
 All rights reserved.
 
-This program is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
-
